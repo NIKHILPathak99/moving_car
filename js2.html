@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moving car</title>
+<style>
+    div{
+        height: 80px;
+        background-color: aquamarine;
+        padding: 10px;
+        margin-block: 10px;
+    }
+    #car{
+        float: left;
+        height: 40px;
+        margin-top: 35px;
+        position: relative;
+    }
+    #tree{
+        float: right;
+        height: 70px;
+        margin-right: 60px;
+        transition: 1s;
+    }
+    button{
+        margin: 10px;
+    }
+</style>
+</head>
+<body onresize="resize()">
+    <h1>Moving Car</h1>
+    <div>
+        <img id="car" src="./icons8-car-48.png" alt="">
+        <img id="tree" src="./icons8-tree-48.png" alt="">
+    </div>
+    <button onclick="f1()">forward</button>
+    <button onclick="f2()">backward</button>
+    <button onclick="f3()">stop</button>
+    <button onclick="f4()">restart</button>
+    <button onclick="f5()">play music</button>
+    <button onclick="f6()">pause music</button>
+</body>
+
+
+
+<script>
+    var car = document.getElementById("car");
+    var tree = document.getElementById("tree");
+
+    var x=0;
+    var i;
+    var w = window.innerWidth-175;
+    var a= new Audio("Geet-Banuga-Kaka.mp3");
+    function f1(){
+        clearInterval(i);
+        i=setInterval(() => {
+            if(x<w){
+                x+=1;
+                car.style.left= x + "px";
+            }else{
+                clearInterval(i);
+                tree.style.transform="rotate(60deg) translate(20px,-30px)";
+                car.src = "icons8-car2-48.png";
+            }
+        }, 1)
+    }
+    function f2(){
+        clearInterval(i);
+        tree.style.transform="rotate(0) translate(0,0)";
+        car.src = "icons8-car-48.png";
+        i = setInterval(()=>{
+            if(x>0){
+                x-=1;
+                car.style.left= x + "px";
+            }
+            else{
+                clearInterval(i);
+            }
+        },1)
+    }
+    function f3(){
+        clearInterval(i);
+    }
+    function f4() {
+        clearInterval(i);
+        tree.style.transform="rotate(0) translate(0,0)";
+        car.src = "icons8-car-48.png";
+        x=0;
+        car.style.left=x + "px";
+        a.pause();
+    }
+    function f5(){
+        a.play();
+    }
+    function f6(){
+        a.pause();
+    }
+    function resize(){
+        w= window.innerWidth - 175;
+        location.reload();
+    }
+</script>
+</html>
